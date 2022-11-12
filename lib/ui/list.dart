@@ -40,13 +40,21 @@ class ListWidget extends StatelessWidget {
 
   // 리스트 뷰
   Widget _makeListView(List<Ev> evs) {
-    return ListView.separated(
-      itemCount: evs.length,
-      itemBuilder: (BuildContext context, int index) {
-        if(evs[index].bussnum == "111"){
-          return Container(height: 100, color: Colors.white, child: _makeEvOne(evs[index]));
+    var node = new List<String>.empty(growable: true);
+    node.addAll(["190-3", "193", "190", "191", "195", "190-1", "192", "196", "190-2", "900", "193-2", "5200", "51-1", "57", "557"]);
+    var temp = new List<Ev>.empty(growable: true);
+    for(int i  = 1; i < evs.length; i++){
+      for(int j = 1; j < node.length; j++){
+        if(evs[i].bussnum == node[j]){
+          temp.add(evs[i]);
         }
-        return SizedBox();
+      }
+    }
+
+    return ListView.separated(
+      itemCount: temp.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(height: 100, color: Colors.white, child: _makeEvOne(temp[index]));
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider();
@@ -62,7 +70,7 @@ class ListWidget extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Ev Provider"),
+          title: Text("구미역 버스 도착 정보"),
         ),
         // Consumer를 통해 데이터를 접근
         body: Consumer<EvProvider>(builder: (context, provider, wideget) {

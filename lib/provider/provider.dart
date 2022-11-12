@@ -15,11 +15,6 @@ class EvProvider extends ChangeNotifier {
     // listEvs에 _evs를 바로 작성해도 되지만 예외 처리와 추가적인 가공을 위해 나눠서 작성한다.
     List<Ev>? listEvs = await _evRepository.loadEvs();
     _evs = listEvs!;
-    for(int i = 1; i < _evs.length; i++){
-      if(_evs[i].bussnum != "111"){
-        _evs.removeAt(i);
-      }
-    }
     notifyListeners(); // 데이터가 업데이트가 됐으면 구독자에게 알린다.
   }
 }
