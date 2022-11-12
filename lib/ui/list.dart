@@ -9,6 +9,9 @@ class ListWidget extends StatelessWidget {
   late EvProvider _evProvider; // EvProvider 호출
 
   Widget _makeEvOne(Ev ev) {
+    var arrtemp = int.tryParse(ev.arrtime ?? "");
+    var ttt = arrtemp! / 60;
+    var buf = ttt.toInt();
     return Row(
       children: [
         Expanded(
@@ -19,7 +22,7 @@ class ListWidget extends StatelessWidget {
                 children: [
                   // 충전소 주소
                   Text(
-                    ev.bussnum.toString(),
+                    ev.bussnum.toString()+" 번",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   SizedBox(
@@ -28,7 +31,7 @@ class ListWidget extends StatelessWidget {
 
                   // 충전기 타입
                   Text(
-                    ev.arrtime.toString(),
+                    buf.toString()+"분 남았습니다.",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                   ),
                 ],
