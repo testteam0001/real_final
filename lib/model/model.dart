@@ -1,5 +1,5 @@
 class Ev {
-  String? arrtime; // 충전소 주소
+  int? arrtime; // 충전소 주소
   String? bussnum; // 충전기 타입
 
   Ev({
@@ -8,8 +8,13 @@ class Ev {
   });
 
   factory Ev.fromJson(Map<String, dynamic>? json) {
+    var temp;
+
+    if(json?["arrtime"] is String){
+      temp = int.tryParse(json?["arrtime"] ?? "");
+    }
     return Ev(
-      arrtime: json?["arrtime"] as String,
+      arrtime: temp,
       bussnum: json?["routeno"] as String,
     );
   }

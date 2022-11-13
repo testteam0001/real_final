@@ -8,8 +8,10 @@ class EvRepository {
 
   Future<List<Ev>?> loadEvs() async {
 
+    var busstop = "GMB89";
+
     String baseUrl =
-        "https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=cUI0v7qNq%2BI2lb7JS7tm%2F94jx1qU8OVMW6tgz9ZO9b%2FGdZUxTzPmTqsBV6KYlC8NsMxzZBxFAlwrUtELLQRNhA%3D%3D&pageNo=1&numOfRows=30&_type=xml&cityCode=37050&nodeId=GMB89";
+        "https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=cUI0v7qNq%2BI2lb7JS7tm%2F94jx1qU8OVMW6tgz9ZO9b%2FGdZUxTzPmTqsBV6KYlC8NsMxzZBxFAlwrUtELLQRNhA%3D%3D&pageNo=1&numOfRows=30&_type=xml&cityCode=37050&nodeId=$busstop";
     final response = await http.get(Uri.parse(baseUrl));
 
     // 정상적으로 데이터를 불러왔다면

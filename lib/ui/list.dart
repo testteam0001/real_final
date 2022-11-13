@@ -9,14 +9,13 @@ class ListWidget extends StatelessWidget {
   late EvProvider _evProvider; // EvProvider 호출
 
   Widget _makeEvOne(Ev ev) {
-    var arrtemp = int.tryParse(ev.arrtime ?? "");
-    var ttt = arrtemp! / 60;
-    var buf = ttt.toInt();
+    var arrtemp = ev.arrtime! / 60;
+    var buf = arrtemp.toInt();
     return Row(
       children: [
         Expanded(
             child: Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -46,18 +45,21 @@ class ListWidget extends StatelessWidget {
     var node = new List<String>.empty(growable: true);
     node.addAll(["190-3", "193", "190", "191", "195", "190-1", "192", "196", "190-2", "900", "193-2", "5200", "51-1", "57", "557"]);
     var temp = new List<Ev>.empty(growable: true);
+
     for(int i  = 1; i < evs.length; i++){
       for(int j = 1; j < node.length; j++){
-        if(evs[i].bussnum == node[j]){
+        if(evs[i].bussnum == node[j] && temp.length < 11){
           temp.add(evs[i]);
         }
       }
     }
 
+    temp.sort((a, b) => a.arrtime!.compareTo(b.arrtime!));
+
     return ListView.separated(
       itemCount: temp.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(height: 100, color: Colors.white, child: _makeEvOne(temp[index]));
+        return Container(height: 79, color: Colors.white, child: _makeEvOne(temp[index]));
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider();
